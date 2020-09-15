@@ -15,6 +15,11 @@
  */
 
 variable "network" {
-  type        = any
+  type = object({
+    name = string
+    region = string
+    natEnabled = bool
+    privateGoogleServicesEnabled = bool
+  })
   description = "Resources as JSON (see README.md). You can read values from a YAML file with yamldecode()."
 }

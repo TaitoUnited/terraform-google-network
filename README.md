@@ -4,21 +4,17 @@ Example usage:
 
 ```
 provider "google" {
-  project = "my-infrastructure"
-  region  = "europe-west1"
-  zone    = "europe-west1b"
+  project      = "my-infrastructure"
+  region       = "europe-west1"
+  zone         = "europe-west1b"
 }
 
 resource "google_project_service" "compute" {
-  service                    = "compute.googleapis.com"
-  disable_dependent_services = true
-  disable_on_destroy         = false
+  service      = "compute.googleapis.com"
 }
 
 resource "google_project_service" "servicenetworking" {
-  service                    = "servicenetworking.googleapis.com"
-  disable_dependent_services = true
-  disable_on_destroy         = false
+  service      = "servicenetworking.googleapis.com"
 }
 
 module "network" {
