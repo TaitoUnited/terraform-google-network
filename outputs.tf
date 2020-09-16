@@ -12,16 +12,28 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+*/
 
-locals {
-  network                = var.network
-
-  network_name           = "${local.network.name}-network"
-  subnet_name            = "${local.network.name}-subnet"
-  pods_ip_range_name     = "${local.network.name}-ip-range-pods"
-  services_ip_range_name = "${local.network.name}-ip-range-svc"
+output "network" {
+  value = module.network.network
 }
 
-data "google_project" "project" {
+output "network_name" {
+  value = module.network.network_name
+}
+
+output "network_self_link" {
+  value = module.network.network_self_link
+}
+
+output "subnet_names" {
+  value = module.network.subnets_names
+}
+
+output "pods_ip_range_name" {
+  value = local.pods_ip_range_name
+}
+
+output "services_ip_range_name" {
+  value = local.services_ip_range_name
 }
