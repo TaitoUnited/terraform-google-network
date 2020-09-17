@@ -37,3 +37,7 @@ output "pods_ip_range_name" {
 output "services_ip_range_name" {
   value = local.services_ip_range_name
 }
+
+output "details" {
+  value = module.network
+}
