@@ -23,9 +23,10 @@ module "network" {
 
   subnets = [
     {
-      subnet_name   = local.subnet_name
-      subnet_ip     = "10.0.0.0/17"
-      subnet_region = local.network.region
+      subnet_name           = local.subnet_name
+      subnet_ip             = "10.0.0.0/17"
+      subnet_region         = local.network.region
+      subnet_private_access = local.network.privateGoogleServicesEnabled
     },
   ]
 
