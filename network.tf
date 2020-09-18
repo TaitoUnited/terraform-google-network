@@ -47,15 +47,15 @@ module "network" {
 
 # Provide network name only after network has been created
 # TODO: Is this still required or can it be replaced with
-# 'module.network[0].network_self_link'?
-data "external" "network_wait" {
-  depends_on = [
-    module.network,
-    google_service_networking_connection.private_vpc_connection
-  ]
-
-  program = ["sh", "-c", "sleep 15; echo '{ \"network_name\": \"${module.network[0].network_name}\", \"network_self_link\": \"${module.network[0].network_self_link}\" }'"]
-}
+# 'module.network.network_self_link'?
+# data "external" "network_wait" {
+#   depends_on = [
+#     module.network,
+#     google_service_networking_connection.private_vpc_connection
+#   ]
+#
+#   program = ["sh", "-c", "sleep 15; echo '{ \"network_name\": \"${module.network.network_name}\", \"network_self_link\": \"${module.network.network_self_link}\" }'"]
+# }
 
 /* NAT */
 
@@ -64,7 +64,7 @@ resource "google_compute_router" "nat_router" {
 
   name    = "nat-router"
   region  = local.network.region
-  network = module.network[0].network_name
+  network = module.network.network_name
   bgp {
     asn = 64514
   }
@@ -90,13 +90,13 @@ resource "google_compute_global_address" "private_ip_address" {
   purpose       = "VPC_PEERING"
   address_type  = "INTERNAL"
   prefix_length = 16
-  network       = module.network[0].network_self_link
+  network       = module.network.network_self_link
 }
 
 resource "google_service_networking_connection" "private_vpc_connection" {
   count         = local.network.privateGoogleServicesEnabled ? 1 : 0
 
-  network                 = module.network[0].network_self_link
+  network                 = module.network.network_self_link
   service                 = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [google_compute_global_address.private_ip_address[0].name]
 }
