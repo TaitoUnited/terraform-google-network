@@ -38,6 +38,7 @@ network:
   region: europe-west1
   natEnabled: true # NAT is required for private Kubernetes or virtual machines
   privateGoogleServicesEnabled: true
+  flowLoggingEnabled: false
   vpcSharingEnabled: false
   sharedVpcServiceProjects:
     - another-project

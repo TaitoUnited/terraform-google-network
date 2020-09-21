@@ -20,6 +20,7 @@ variable "network" {
     region = string
     natEnabled = bool
     privateGoogleServicesEnabled = bool
+    flowLoggingEnabled = bool
     vpcSharingEnabled = bool
     sharedVpcServiceProjects = list(string)
   })

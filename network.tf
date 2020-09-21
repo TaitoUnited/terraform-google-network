@@ -28,6 +28,7 @@ module "network" {
       subnet_ip             = "10.0.0.0/17"
       subnet_region         = local.network.region
       subnet_private_access = local.network.privateGoogleServicesEnabled
+      subnet_flow_logs      = local.network.flowLoggingEnabled
     },
   ]
 
