@@ -20,6 +20,8 @@ variable "network" {
     region = string
     natEnabled = bool
     privateGoogleServicesEnabled = bool
+    vpcSharingEnabled = bool
+    sharedVpcServiceProjects = list(string)
   })
   description = "Resources as JSON (see README.md). You can read values from a YAML file with yamldecode()."
 }

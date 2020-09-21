@@ -15,11 +15,12 @@
  */
 
 module "network" {
-  source       = "terraform-google-modules/network/google"
-  version      = "~> 2.5.0"
+  source                    = "terraform-google-modules/network/google"
+  version                   = "~> 2.5.0"
 
-  project_id   = data.google_project.project.project_id
-  network_name = local.network_name
+  project_id                = data.google_project.project.project_id
+  network_name              = local.network_name
+  shared_vpc_host           = local.network.vpcSharingEnabled
 
   subnets = [
     {
@@ -100,4 +101,12 @@ resource "google_service_networking_connection" "private_vpc_connection" {
   network                 = module.network.network_self_link
   service                 = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [google_compute_global_address.private_ip_address[0].name]
+}
+
+/* Shared vpc service projects */
+
+resource "google_compute_shared_vpc_service_project" "service1" {
+  count           = length(local.network.sharedVpcServiceProjects)
+  host_project    = data.google_project.project.project_id
+  service_project = local.network.sharedVpcServiceProjects[count.index]
 }
