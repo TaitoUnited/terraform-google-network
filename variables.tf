@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+variable "project_id" {
+  type        = string
+}
+
 variable "network" {
   type = object({
     name = string

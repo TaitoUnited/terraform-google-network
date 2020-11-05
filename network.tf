@@ -18,7 +18,7 @@ module "network" {
   source                    = "terraform-google-modules/network/google"
   version                   = "~> 2.5.0"
 
-  project_id                = data.google_project.project.project_id
+  project_id                = var.project_id
   network_name              = local.network_name
   shared_vpc_host           = local.network.vpcSharingEnabled
 
@@ -78,7 +78,7 @@ module "cloud-nat" {
 
   source     = "terraform-google-modules/cloud-nat/google"
   version    = "~> 1.3"
-  project_id = data.google_project.project.project_id
+  project_id = var.project_id
   region     = local.network.region
   router     = google_compute_router.nat_router[0].name
 }
@@ -88,7 +88,7 @@ module "cloud-nat" {
 resource "google_compute_global_address" "private_ip_address" {
   count         = local.network.privateGoogleServicesEnabled ? 1 : 0
 
-  project       = data.google_project.project.project_id
+  project       = var.project_id
   name          = "private-ip-address"
   purpose       = "VPC_PEERING"
   address_type  = "INTERNAL"
@@ -108,6 +108,6 @@ resource "google_service_networking_connection" "private_vpc_connection" {
 
 resource "google_compute_shared_vpc_service_project" "service1" {
   count           = length(local.network.sharedVpcServiceProjects)
-  host_project    = data.google_project.project.project_id
+  host_project    = var.project_id
   service_project = local.network.sharedVpcServiceProjects[count.index]
 }

@@ -6,7 +6,7 @@ Example usage:
 provider "google" {
   project      = "my-infrastructure"
   region       = "europe-west1"
-  zone         = "europe-west1b"
+  zone         = "europe-west1-b"
 }
 
 resource "google_project_service" "compute" {
@@ -26,6 +26,7 @@ module "network" {
     google_project_service.servicenetworking
   ]
 
+  project_id   = "my-infrastructure"
   network      = yamldecode(file("${path.root}/../infra.yaml"))["network"]
 }
 ```

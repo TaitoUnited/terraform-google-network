@@ -22,6 +22,3 @@ locals {
   pods_ip_range_name     = "${local.network.name}-ip-range-pods"
   services_ip_range_name = "${local.network.name}-ip-range-svc"
 }
-
-data "google_project" "project" {
-}
