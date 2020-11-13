@@ -107,7 +107,7 @@ resource "google_service_networking_connection" "private_vpc_connection" {
 /* Shared vpc service projects */
 
 resource "google_compute_shared_vpc_service_project" "service1" {
-  count           = length(local.network.sharedVpcServiceProjects)
+  for_each        = {for item in local.network.sharedVpcServiceProjects: item => item}
   host_project    = var.project_id
-  service_project = local.network.sharedVpcServiceProjects[count.index]
+  service_project = each.value
 }
