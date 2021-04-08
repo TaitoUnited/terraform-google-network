@@ -63,7 +63,7 @@ module "network" {
 /* NAT */
 
 resource "google_compute_router" "nat_router" {
-  count   = try(local.network.natEnabled, false) ? 1 : 0
+  count   = coalesce(local.network.natEnabled, false) ? 1 : 0
 
   name    = "nat-router"
   region  = local.network.region
@@ -74,7 +74,7 @@ resource "google_compute_router" "nat_router" {
 }
 
 module "cloud-nat" {
-  count      = try(local.network.natEnabled, false) ? 1 : 0
+  count      = coalesce(local.network.natEnabled, false) ? 1 : 0
 
   source     = "terraform-google-modules/cloud-nat/google"
   version    = "~> 1.3"

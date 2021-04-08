@@ -18,11 +18,11 @@ terraform {
   required_providers {
     google = {
       source = "hashicorp/google"
-      version = "=3.61.0"
+      version = ">=3.61.0"
     }
     external = {
       source = "hashicorp/external"
-      version = "=2.1.0"
+      version = ">=2.1.0"
     }
   }
 
