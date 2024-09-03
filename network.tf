@@ -16,7 +16,7 @@
 
 module "network" {
   source                    = "terraform-google-modules/network/google"
-  version                   = "~> 2.5.0"
+  version                   = "9.1.0"
 
   project_id                = var.project_id
   network_name              = local.network_name
@@ -77,7 +77,7 @@ module "cloud-nat" {
   count      = coalesce(local.network.natEnabled, false) ? 1 : 0
 
   source     = "terraform-google-modules/cloud-nat/google"
-  version    = "~> 1.3"
+  version    = "5.3.0"
   project_id = var.project_id
   region     = local.network.region
   router     = google_compute_router.nat_router[0].name

@@ -19,7 +19,7 @@ resource "google_project_service" "servicenetworking" {
 
 module "network" {
   source       = "TaitoUnited/network/google"
-  version      = "1.0.0"
+  version      = "2.1.0"
   providers    = [ google ]
   depends_on   = [
     google_project_service.compute,
