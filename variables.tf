@@ -24,9 +24,31 @@ variable "network" {
     region = string
     natEnabled = bool
     privateGoogleServicesEnabled = bool
-    flowLoggingEnabled = bool
     vpcSharingEnabled = bool
     sharedVpcServiceProjects = list(string)
+
+    subnets = list(object({
+      subnet_name                      = string
+      subnet_ip                        = string
+      subnet_region                    = string
+      subnet_private_access            = optional(string)
+      subnet_private_ipv6_access       = optional(string)
+      subnet_flow_logs                 = optional(string)
+      subnet_flow_logs_interval        = optional(string)
+      subnet_flow_logs_sampling        = optional(string)
+      subnet_flow_logs_metadata        = optional(string)
+      subnet_flow_logs_filter          = optional(string)
+      subnet_flow_logs_metadata_fields = optional(list(string))
+      description                      = optional(string)
+      purpose                          = optional(string)
+      role                             = optional(string)
+      stack_type                       = optional(string)
+      ipv6_access_type                 = optional(string)
+    }))
+
+    secondary_ranges = map(list(object(
+      { range_name = string, ip_cidr_range = string }
+    )))
   })
   description = "Resources as JSON (see README.md). You can read values from a YAML file with yamldecode()."
 }

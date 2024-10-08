@@ -16,34 +16,15 @@
 
 module "network" {
   source                    = "terraform-google-modules/network/google"
-  version                   = "9.1.0"
+  version                   = "9.3.0"
 
   project_id                = var.project_id
   network_name              = local.network_name
   shared_vpc_host           = local.network.vpcSharingEnabled
 
-  subnets = [
-    {
-      subnet_name           = local.subnet_name
-      subnet_ip             = "10.0.0.0/17"
-      subnet_region         = local.network.region
-      subnet_private_access = local.network.privateGoogleServicesEnabled
-      subnet_flow_logs      = local.network.flowLoggingEnabled
-    },
-  ]
+  subnets                   = var.network.subnets
 
-  secondary_ranges = {
-    "${local.subnet_name}" = [
-      {
-        range_name    = local.pods_ip_range_name
-        ip_cidr_range = "192.168.0.0/18"
-      },
-      {
-        range_name    = local.services_ip_range_name
-        ip_cidr_range = "192.168.64.0/18"
-      },
-    ]
-  }
+  secondary_ranges          = var.network.secondary_ranges
 
   # TODO: prevent destroy -> https://github.com/hashicorp/terraform/issues/18367
 }

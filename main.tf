@@ -18,7 +18,4 @@ locals {
   network                = var.network
 
   network_name           = "${local.network.name}-network"
-  subnet_name            = "${local.network.name}-subnet"
-  pods_ip_range_name     = "${local.network.name}-ip-range-pods"
-  services_ip_range_name = "${local.network.name}-ip-range-svc"
 }
