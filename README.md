@@ -51,27 +51,27 @@ network:
       subnet_region: europe-west1
       subnet_private_access: true
       subnet_flow_logs: true
-    - subnet_name: my-network-eu-west1,
-      subnet_ip: 10.0.32.0/19,
-      subnet_region: europe-west1,
-      subnet_private_access: true,
+    - subnet_name: my-network-eu-west1
+      subnet_ip: 10.0.32.0/19
+      subnet_region: europe-west1
+      subnet_private_access: true
       subnet_flow_logs: false
-    - subnet_name: my-network-eu-west4,
-      subnet_ip: 10.0.64.0/19,
-      subnet_region: europe-west1,
-      subnet_private_access: true,
+    - subnet_name: my-network-eu-west4
+      subnet_ip: 10.0.64.0/19
+      subnet_region: europe-west1
+      subnet_private_access: true
       subnet_flow_logs: false
 
   secondary_ranges:
     my-network-eu-west1:
-      - range_name: my-network-eu-west1-pods,
+      - range_name: my-network-eu-west1-pods
         ip_cidr_range: 192.168.0.0/19
-      - range_name: my-network-eu-west1-services,
+      - range_name: my-network-eu-west1-services
         ip_cidr_range: 192.168.32.0/19
     my-network-eu-west4:
-      - range_name: my-network-eu-west4-pods,
-        ip_cidr_range: 192.168.64.0/19,
-      - range_name: my-network-eu-west4-services,
+      - range_name: my-network-eu-west4-pods
+        ip_cidr_range: 192.168.64.0/19
+      - range_name: my-network-eu-west4-services
         ip_cidr_range: 192.168.96.0/19
 ```
 
