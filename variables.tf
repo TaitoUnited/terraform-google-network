@@ -22,6 +22,7 @@ variable "network" {
   type = object({
     name = string
     region = string
+    dnsLoggingEnabled = bool
     natEnabled = bool
     privateGoogleServicesEnabled = bool
     vpcSharingEnabled = bool

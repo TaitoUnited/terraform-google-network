@@ -39,6 +39,7 @@ Example YAML:
 network:
   name: my-network
   region: europe-west1
+  dnsLoggingEnabled: true
   natEnabled: true # NAT is required for private Kubernetes or virtual machines
   privateGoogleServicesEnabled: true
   vpcSharingEnabled: false
